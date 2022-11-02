@@ -4,13 +4,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
   devServer: {
-    port: 4000,
+    port: 4001,
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "Container",
-      remotes: {
-        remote: "Remote@http://localhost:4001/client/remoteEntry.js", 
+      name: "Remote",
+      filename: "remoteEntry.js",
+      exposes: {
+        './App': './src/index.js',
       },
     }),
     new HtmlWebpackPlugin({
